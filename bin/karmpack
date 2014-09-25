@@ -1,0 +1,8 @@
+#!/usr/bin/env node
+
+var yargs = require('yargs');
+var cli = require('../src/cli');
+
+var exitCode = cli(yargs.argv);
+process.exit(exitCode);
+

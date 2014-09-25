@@ -1,0 +1,24 @@
+{
+  "name": "karmpack",
+  "version": "0.1.0",
+  "author": "Sasha Koss <kossnocorp@gmail.com>",
+  "description": "Karma + webpack - lot of code = Karmpack",
+  "repository": "https://github.com/kossnocorp/karmpack",
+  "engine": {
+    "node": ">= 0.10"
+  },
+  "dependencies": {
+    "yargs": "^1.3.1"
+  },
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "mocha": "^1.21.4",
+    "sinon": "^1.10.3",
+    "sinon-chai": "^2.5.0"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/mocha \"src/**/__tests__/*.js\" --require \"src/__tests__/_test_helper\" --recursive --reporter spec",
+    "autotest": "npm test -- --watch"
+  }
+}
+
