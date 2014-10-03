@@ -179,13 +179,10 @@ describe('karmakWatcher', function() {
         beforeEach(function(done) {
           fs.mkdir(dirPath, function(err) {
             touch(dirPath + 'file_test.js', function(err) {
-              //console.log('=====================')
-              //console.log(err)
               touch(dirPath + 'file2_test.js', function() {
                 setTimeout(function() {
                   done();
-
-                }, 8000)
+                }, 800)
               });
             });
           });
