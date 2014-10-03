@@ -1,15 +1,23 @@
+var logger = require('./logger');
+var watcher = require('./watcher/watcher')
+
 /**
  * Runs karmpack with passed options and returns is task was successful.
- * @param {Object} options
- * @param {Boolean} [options.watch=false] - watch for changes or single run
- * @returns {Boolean} success?
+ * @param {object} options
+ * @param {boolean} [options.watch=false] - watch for changes or single run
+ * @param {function} callback
  */
-var runner = function(options) {
+var runner = function(options, cb) {
+  logger.log('karmpack', 'Starting runner...');
+
   var singleRun = !options.watch;
 
-  /** @todo build entry point */
-  /** @todo run webpack */
-  /** @todo run karma */
+  var closeWatcher = watcher.watch({
+    path: process.cwd() + '/'
+  });
+
+  logger.log('webpack', 'TODO');
+  logger.log('karma', 'TODO');
 };
 
 module.exports = runner;
