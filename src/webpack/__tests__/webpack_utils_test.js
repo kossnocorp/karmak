@@ -30,12 +30,20 @@ describe('karmakWebpackUtils', function() {
     });
   });
 
+  describe('.generateConfig', function() {
+    it('generates basic webpack config');
+  });
+
   describe('.injectConfig', function() {
     it('sets entry point');
 
     it('adds build plugin');
 
     it('adds rewire plugin');
+  });
+
+  describe('.formatErrors', function() {
+    it('format errors for printing');
   });
 });
 

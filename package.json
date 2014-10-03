@@ -1,9 +1,9 @@
 {
-  "name": "karmpack",
+  "name": "karmak",
   "version": "0.1.0",
   "author": "Sasha Koss <kossnocorp@gmail.com>",
-  "description": "Karma + webpack - lot of code = Karmpack",
-  "repository": "https://github.com/kossnocorp/karmpack",
+  "description": "Karma + webpack - lot of code = Karmak",
+  "repository": "https://github.com/kossnocorp/karmak",
   "engine": {
     "node": ">= 0.10"
   },
