@@ -49,19 +49,21 @@ describe('karmakWatcheUtils', function() {
 
   describe('.ensureTmpDir', function() {
     it('creates tmp dir in given path', function(done) {
-      karmakWatcheUtils.ensureTmpDir(__dirname + '/', function() {
-        fs.stat(__dirname + '/tmp', function(err, stats) {
-          expect(stats.isDirectory()).to.be.true;
-          done();
+      karmakWatcheUtils.ensureTmpDir(__dirname + '/')
+        .then(function() {
+          fs.stat(__dirname + '/tmp', function(err, stats) {
+            expect(stats.isDirectory()).to.be.true;
+            done();
+          });
         });
-      });
     });
 
     it('do not fails if dir is already exists', function(done) {
       fs.mkdir(__dirname + '/tmp', function() {
-        karmakWatcheUtils.ensureTmpDir(__dirname + '/', function() {
-          done();
-        });
+        karmakWatcheUtils.ensureTmpDir(__dirname + '/')
+          .then(function() {
+            done();
+          });
       });
     });
   });

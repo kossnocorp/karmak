@@ -1,9 +1,9 @@
-var fs = require('fs');
 var path = require('path');
 var minimatch = require('minimatch');
 var fsWatcher = require('watchr');
 var readdir = require('recursive-readdir');
 var prettyjson = require('prettyjson');
+var Promise = require('bluebird');
 var logger = require('./../logger');
 var karmakWatcherUtils = require('./watcher_utils');
 
@@ -35,15 +35,16 @@ var karmakWatcher = {
 
     var testFiles;
 
-    karmakWatcherUtils.ensureTmpDir(baseDir, function() {
-      karmakWatcher._buildInitialEntry(baseDir, patterns, function(testFiles) {
-        if (options.onInitialBuild) options.onInitialBuild();
+    karmakWatcherUtils.ensureTmpDir(baseDir)
+      .then(function() {
+        karmakWatcher._buildInitialEntry(baseDir, patterns, function(testFiles) {
+          if (options.onInitialBuild) options.onInitialBuild();
 
-        karmakWatcher._startFsWatching(baseDir, patterns, testFiles, function(close) {
-          if (options.onReady) options.onReady(close);
+          karmakWatcher._startFsWatching(baseDir, patterns, testFiles, function(close) {
+            if (options.onReady) options.onReady(close);
+          });
         });
       });
-    });
   },
 
   /**

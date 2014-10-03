@@ -1,5 +1,8 @@
 var fs = require('fs');
 var minimatch = require('minimatch');
+var Promise = require('bluebird');
+
+Promise.promisifyAll(fs);
 
 /**
  * @module karmakWatcherUtils
@@ -24,7 +27,7 @@ var karmakWatcherUtils = {
    * @param {function} done
    */
   writeEntry: function(path, content, done) {
-    //fs.writeFile(path, content, done);
+    /** @todo find a way to make it async */
     fs.writeFileSync(path, content);
     done();
   },
@@ -32,12 +35,10 @@ var karmakWatcherUtils = {
   /**
    * Ensures that tmp dir is exists in given path.
    * @param {string} path to base dir
-   * @param {function} done
    */
-  ensureTmpDir: function(path, done) {
-    //fs.mkdir(path + 'tmp', done);
-    try { fs.mkdirSync(path + 'tmp') } catch(e) {}
-    done();
+  ensureTmpDir: function(path) {
+    return fs.mkdirAsync(path + 'tmp')
+      .catch(function() {}); // Ignore EEXIST
   },
 
   /**
