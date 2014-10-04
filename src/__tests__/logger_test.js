@@ -46,10 +46,10 @@ describe('logger', function() {
       );
     });
 
-    it('returns colorfied karmpack process name', function() {
-      var result = logger.processStr('karmpack');
+    it('returns colorfied karmak process name', function() {
+      var result = logger.processStr('karmak');
       expect(result).to.be.eql(
-        '\u001b[40m\u001b[37m[KARMPACK]\u001b[39m\u001b[49m'
+        '\u001b[40m\u001b[37m[KARMAK]\u001b[39m\u001b[49m'
       );
     });
 

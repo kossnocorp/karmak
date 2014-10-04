@@ -1,7 +1,7 @@
 var runner = require('./runner');
 
 /**
- * Runs karmpack with passed CL arguments and returns proper exit code.
+ * Runs karmak with passed CL arguments and returns proper exit code.
  * @param {Object} argv
  * @param {function} callback
  */

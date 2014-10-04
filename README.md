@@ -1,4 +1,4 @@
-# Karma + webpack - lot of code = Karmpack
+# Karma + webpack - lot of code = Karmak
 
 TODO
 

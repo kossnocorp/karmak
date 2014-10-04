@@ -21,7 +21,7 @@ var COLORS = {
     background: 'yellow'
   },
 
-  'karmpack': {
+  'karmak': {
     color: 'white',
     background: 'black'
   },
