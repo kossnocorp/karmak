@@ -1,7 +1,7 @@
 # Karma + webpack - lot of code = Karmak
 [![Build Status](https://travis-ci.org/kossnocorp/karmak.svg)](https://travis-ci.org/kossnocorp/karmak)
 
-**Warning:** currently Karmak are not tested well on different enviorments.
+**Warning:** currently Karmak is not tested well on different enviorments.
 It works for my project, but may not play well for your's. Please open issue
 if you have problems.
 
