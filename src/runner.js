@@ -1,23 +1,53 @@
+var domain = require('domain');
+var prettyjson = require('prettyjson');
 var logger = require('./logger');
-var watcher = require('./watcher/watcher')
+var watcher = require('./watcher/watcher');
+var webpack = require('./webpack/webpack');
+var karma = require('./karma/karma');
 
 /**
  * Runs karmak with passed options and returns is task was successful.
  * @param {object} options
- * @param {boolean} [options.watch=false] - watch for changes or single run
+ * @param {boolean} [options.webpackConfigPath]
+ * @param {boolean} [options.karmaConfigPath]
+ * @param {boolean} [options.patterns]
+ * @param {boolean} [options.singleRun=false]
  * @param {function} callback
  */
-var runner = function(options, cb) {
-  logger.log('karmak', 'Starting runner...');
+var runner = function(options, callback) {
+  var runnerDomain = domain.create();
 
-  var singleRun = !options.watch;
+  runnerDomain.run(function() {
+    logger.log('karmak', 'Starting runner...');
 
-  var closeWatcher = watcher.watch({
-    path: process.cwd() + '/'
+    var singleRun = !!options.singleRun;
+
+    var closeWatcher = watcher.watch({
+      path: process.cwd() + '/',
+      singleRun: singleRun,
+      patterns: options.patterns,
+
+      onReady: function() {
+        webpack.build({
+          path: process.cwd() + '/',
+          singleRun: singleRun,
+          webpackConfigPath: options.webpackConfigPath,
+
+          onReady: function() {
+            karma.run({
+              path: process.cwd(),
+              singleRun: singleRun,
+              configPath: options.karmaConfigPath
+            })
+          }
+        });
+      }
+    });
   });
 
-  logger.log('webpack', 'TODO');
-  logger.log('karma', 'TODO');
+  runnerDomain.on('error', function(err) {
+    logger.error('karmak', "\n" + prettyjson.render(err));
+  });
 };
 
 module.exports = runner;

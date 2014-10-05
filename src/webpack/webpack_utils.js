@@ -1,3 +1,8 @@
+var path = require('path');
+var objectAssign = require('object-assign');
+var WebpackOnBuildPlugin = require('./webpack_on_build_plugin');
+var WebpackRewirePlugin = require('rewire-webpack');
+
 /**
  * @module karmakWatcherUtils
  * Functionality related to webpack.
@@ -14,20 +19,45 @@ var karmakWebpackUtils = {
   readConfig: function(options) {
     options = options || {};
 
-    var webpackConfigPath =
-      options.path || (options.baseDir || process.cwd()) + '/webpack.config';
+    var webpackConfigPath = path.resolve(
+      options.baseDir || process.cwd(),
+      options.path || './webpack.config.js'
+    );
     var webpackConfig = require(webpackConfigPath);
 
     return webpackConfig;
   },
 
   /**
-   * Injects karmak hooks into webpack config
+   * Generates basic webpack config.
+   * @param {string} baseDir (webpack context)
+   * @returns {object} basic webpack config
+   */
+  generateConfig: function(baseDir)  {
+    return {
+      cache: true,
+      context: baseDir,
+      resolve: { root: baseDir }
+    };
+  },
+
+  /**
+   * Injects karmak hooks into webpack config.
    * @param {object} webpackConfig
+   * @param {string} baseDir
+   * @param {function} callback (on build callback)
    * @returns {object} modified webpack config
    */
-  injectConfig: function(webpackConfig)  {
-    // TODO
+  injectConfig: function(webpackConfig, baseDir, callback)  {
+    var injectedConfig = objectAssign({}, webpackConfig);
+
+    injectedConfig['entry'] = { tests: baseDir + 'tmp/karmak_entry.js' };
+
+    injectedConfig['plugins'] = injectedConfig.plugins || [];
+    injectedConfig['plugins'].push(new WebpackOnBuildPlugin(callback));
+    injectedConfig['plugins'].push(new WebpackRewirePlugin());
+
+    return injectedConfig;
   }
 };
 

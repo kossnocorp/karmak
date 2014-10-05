@@ -1,7 +1,6 @@
 /**
  * @module WebpackOnBuildPlugin
  */
-
 function WebpackOnBuildPlugin(callback) {
   this.callback = callback;
 };

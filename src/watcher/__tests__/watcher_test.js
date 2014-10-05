@@ -41,7 +41,7 @@ describe('karmakWatcher', function() {
     });
 
     it('builds entry point with initial list of test files', function(done) {
-      var close = karmakWatcher.watch({
+      karmakWatcher.watch({
         path: path,
         onReady: function(close) {
           close();
@@ -55,6 +55,30 @@ describe('karmakWatcher', function() {
                 "require('" + path + "src/__tests__/file2_test.js');\n" +
                 "require('" + path + "test/_test_helper.js');\n" +
                 "require('" + path + "test/example_test.js');\n"
+              );
+              done();
+            }
+          );
+        }
+      });
+    });
+
+    it('allows to specify patterns', function() {
+      karmakWatcher.watch({
+        path: path,
+        patterns: [
+          '**/*/_test_helper.js',
+          '!' + 'node_modules/**/*'
+        ],
+        onReady: function(close) {
+          close();
+
+          fs.readFile(
+            path + 'tmp/karmak_entry.js',
+            function(err, entryContent) {
+              expect(entryContent.toString()).to.be.eql(
+                "require('" + path + "src/__tests__/_test_helper.js');\n" +
+                "require('" + path + "test/_test_helper.js');\n"
               );
               done();
             }

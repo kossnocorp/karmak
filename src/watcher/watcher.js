@@ -22,7 +22,7 @@ var karmakWatcher = {
     options = options || {};
 
     var baseDir = options.path || (process.cwd() + '/');
-    var patterns = [
+    var patterns = options.patterns || [
       '**/*/_test_helper.js',
       '**/*_test.js',
       '!' + 'node_modules/**/*'
@@ -40,9 +40,14 @@ var karmakWatcher = {
         karmakWatcher._buildInitialEntry(baseDir, patterns, function(testFiles) {
           if (options.onInitialBuild) options.onInitialBuild();
 
-          karmakWatcher._startFsWatching(baseDir, patterns, testFiles, function(close) {
-            if (options.onReady) options.onReady(close);
-          });
+          if (options.singleRun) {
+            if (options.onReady) options.onReady();
+
+          } else {
+            karmakWatcher._startFsWatching(baseDir, patterns, testFiles, function(close) {
+              if (options.onReady) options.onReady(close);
+            });
+          }
         });
       });
   },

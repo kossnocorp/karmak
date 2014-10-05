@@ -5,10 +5,18 @@ var runner = require('./runner');
  * @param {Object} argv
  * @param {function} callback
  */
-var cli = function(argv, cb) {
-  /** @todo reformat options for runner */
-  runner(argv, function(success) {
-    cb(success ? 0 : 1);
+var cli = function(argv, callback) {
+  process.env.NODE_ENV = 'test';
+
+  var options = {
+    webpackConfigPath: argv.webpackConfig,
+    karmaConfigPath: argv.karmaConfig,
+    patterns: argv.pattern,
+    singleRun: argv.singleRun
+  };
+
+  runner(options, function(success) {
+    callback(success ? 0 : 1);
   });
 };
 
