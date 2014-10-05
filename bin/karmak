@@ -1,9 +1,28 @@
 #!/usr/bin/env node
 
-var yargs = require('yargs');
+var program = require('commander');
 var cli = require('../src/cli');
+var packageJSON = require('../package.json');
 
-cli(yargs.argv, function(exitCode) {
-  process.exit(exitCode);
-});
+program
+  .version(packageJSON['version'])
+  .usage('[options]')
+  .option('--single-run', 'signle run? (false)')
+  .option(
+    '--webpack-config <path>',
+    'webpack config path (./webpack.config.js)'
+  )
+  .option('--karma-config <path>', 'Karma config path (./karma.conf.js)')
+  .option(
+    '--pattern <pattern>',
+    "test files patterns (['**/*/_test_helper.js', '**/*_test.js', '!node_modules/**/*'])",
+    function(val, acc) { return (acc || []).concat(val) }
+  )
+  .option('--env', "NODE_ENV ('test' if undefined)")
+  .parse(process.argv);
+
+cli(program)
+  .then(function(exitCode) {
+    process.exit(exitCode);
+  });
 

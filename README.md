@@ -5,8 +5,30 @@
 It works for my project, but may not play well for your's. Please open issue
 if you have problems.
 
+## Installation
+
+``` sh
+npm install --save-dev karmak
+```
 
 ## Usage
+
+### CLI
+
+`./node_modules/.bin/karmak --help`:
+```
+  Usage: karmak [options]
+
+  Options:
+
+    -h, --help               output usage information
+    -V, --version            output the version number
+    --single-run             signle run? (false)
+    --webpack-config <path>  webpack config path (./webpack.config.js)
+    --karma-config <path>    Karma config path (./karma.conf.js)
+    --pattern <pattern>      test files patterns (['**/*/_test_helper.js', '**/*_test.js', '!node_modules/**/*'])
+    --env                    NODE_ENV ('test' if undefined)
+```
 
 ### Preparation
 

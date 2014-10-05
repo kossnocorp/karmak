@@ -1,22 +1,25 @@
+var Promise = require('bluebird');
 var runner = require('./runner');
 
 /**
- * Runs karmak with passed CL arguments and returns proper exit code.
- * @param {Object} argv
- * @param {function} callback
+ * Runs Karmak with passed options and returns proper exit code.
+ * @param {object} program
+ * @returns {promise}
  */
-var cli = function(argv, callback) {
-  process.env.NODE_ENV = 'test';
+var cli = function(program, callback) {
+  process.env.NODE_ENV = process.env.NODE_ENV || program.env || 'test';
 
   var options = {
-    webpackConfigPath: argv.webpackConfig,
-    karmaConfigPath: argv.karmaConfig,
-    patterns: argv.pattern,
-    singleRun: argv.singleRun
+    webpackConfigPath: program.webpackConfig,
+    karmaConfigPath: program.karmaConfig,
+    patterns: program.pattern,
+    singleRun: program.singleRun
   };
 
-  runner(options, function(success) {
-    callback(success ? 0 : 1);
+  return new Promise(function(resolve) {
+    runner(options, function(success) {
+      resolve(success ? 0 : 1);
+    });
   });
 };
 
