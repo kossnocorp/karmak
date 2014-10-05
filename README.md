@@ -8,6 +8,11 @@ if you have problems.
 
 ## Usage
 
+### Preparation
+
+Remove test patterns from Karma's `files` array and replace it with
+`--pattern` arguments.
+
 ### Single run
 
 ``` sh
