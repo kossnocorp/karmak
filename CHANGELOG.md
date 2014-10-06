@@ -1,7 +1,9 @@
 # Changelog
 
-## v0.2.0 (_unreleased_)
+## v0.1.1 (6 Oct 2014)
 
+* Bug fixes:
+  - Problem with Karma plugins
 * Additions:
   - Ability to override `NODE_ENV` (`--env` option)
 * Improvements:
