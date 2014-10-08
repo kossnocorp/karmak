@@ -27,6 +27,17 @@ describe('karmakWatcheUtils', function() {
         "require('c');\n"
       );
     });
+
+    it('escapes Windows paths', function() {
+      var result = karmakWatcheUtils.buildEntry([
+        'c:\\src\\a.js',
+        'c:\\src\\b.js'
+      ]);
+      expect(result).to.be.eql(
+        "require('c:\\\\src\\\\a.js');\n" +
+        "require('c:\\\\src\\\\b.js');\n"
+      );
+    });
   });
 
   describe('.writeEntry', function() {

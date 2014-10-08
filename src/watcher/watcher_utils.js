@@ -16,8 +16,10 @@ var karmakWatcherUtils = {
    * @returns {string} entry file content
    */
   buildEntry: function(files) {
-    return files.reduce(function(content, file) {
-      return content + "require('" + file + "');\n";
+    return files.reduce(function(content, filename) {
+      // Windows-compatibility
+      var escapedFilename = filename.replace(/\\/g, '\\\\');
+      return content + "require('" + escapedFilename + "');\n";
     }, '');
   },
 
