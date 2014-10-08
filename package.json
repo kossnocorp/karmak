@@ -1,6 +1,6 @@
 {
   "name": "karmak",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "author": "Sasha Koss <kossnocorp@gmail.com>",
   "description": "Karma + webpack - lot of code = Karmak",
   "repository": "https://github.com/kossnocorp/karmak",

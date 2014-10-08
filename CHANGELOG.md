@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.3 (8 Oct 2014)
+
+* Bug fixes:
+  - Escape paths on entry build (Windows-compatibility)
+
 ## v0.1.2 (8 Oct 2014)
 
 * Bug fixes:
