@@ -1,4 +1,5 @@
 var fs = require('fs');
+var path = require('path');
 var webpack = require('webpack');
 var webpackMiddleware = require('webpack-dev-middleware');
 var express = require('express');
@@ -40,7 +41,7 @@ var karmakWebpack = {
    * @returns {object}
    */
   _getConfig: function(options) {
-    var baseDir = options.path || (process.cwd() + '/');
+    var baseDir = options.path || process.cwd();
 
     var webpackConfig = karmakWebpackUtils.readConfig({
       path: options.webpackConfigPath,
@@ -68,7 +69,7 @@ var karmakWebpack = {
     if (errors.length == 0) {
       karmakWebpack._log('Build completed');
       var source = stats.compilation.assets['js/tests.js']._sourceResult;
-      fs.writeFileSync(baseDir + 'tmp/karmak_tests.js', source);
+      fs.writeFileSync(path.join(baseDir, 'tmp', 'karmak_tests.js'), source);
 
       if (!state.onceBuilded) {
         state.onceBuilded = true;

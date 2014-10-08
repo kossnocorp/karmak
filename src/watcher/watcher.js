@@ -21,7 +21,7 @@ var karmakWatcher = {
 
     options = options || {};
 
-    var baseDir = options.path || (process.cwd() + '/');
+    var baseDir = options.path || process.cwd();
     var patterns = options.patterns || [
       '**/*/_test_helper.js',
       '**/*_test.js',
@@ -125,7 +125,7 @@ var karmakWatcher = {
   _writeEntry: function(baseDir, entryContent, callback) {
     karmakWatcher._log('Building entry file...');
     karmakWatcherUtils.writeEntry(
-      baseDir + 'tmp/karmak_entry.js',
+      path.join(baseDir, 'tmp', 'karmak_entry.js'),
       entryContent,
       function() {
         karmakWatcher._log('... done');

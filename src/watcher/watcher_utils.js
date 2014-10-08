@@ -1,4 +1,5 @@
 var fs = require('fs');
+var path = require('path');
 var minimatch = require('minimatch');
 var Promise = require('bluebird');
 
@@ -34,11 +35,11 @@ var karmakWatcherUtils = {
 
   /**
    * Ensures that tmp dir is exists in given path.
-   * @param {string} path to base dir
+   * @param {string} baseDir
    */
-  ensureTmpDir: function(path) {
-    return fs.mkdirAsync(path + 'tmp')
-      .catch(function() {}); // Ignore EEXIST
+  ensureTmpDir: function(baseDir) {
+    return fs.mkdirAsync(path.join(baseDir, 'tmp'))
+      .catch(function() {}); // Ignore EEXIST (Already exists)
   },
 
   /**
@@ -47,7 +48,7 @@ var karmakWatcherUtils = {
    */
   dirFor: function(filename) {
     var captures = filename.match(/(.+\/)[^\/]+$/);
-   return captures ? captures[1] : filename;
+    return captures ? captures[1] : filename;
   },
 
   /**
@@ -81,7 +82,10 @@ var karmakWatcherUtils = {
    */
   excludeDir: function(files, dir) {
     return files.filter(function(file) {
-      return !minimatch(file, dir + '*') && !minimatch(file, dir + '**/*');
+      return(
+        !minimatch(file, path.join(dir, '*')) &&
+        !minimatch(file, path.join(dir, '**/*'))
+      );
     });
   },
 

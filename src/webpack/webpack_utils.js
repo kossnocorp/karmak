@@ -51,7 +51,9 @@ var karmakWebpackUtils = {
   injectConfig: function(webpackConfig, baseDir, callback)  {
     var injectedConfig = objectAssign({}, webpackConfig);
 
-    injectedConfig['entry'] = { tests: baseDir + 'tmp/karmak_entry.js' };
+    injectedConfig['entry'] = {
+      tests: path.join(baseDir, 'tmp', 'karmak_entry.js')
+    };
 
     injectedConfig['plugins'] = injectedConfig.plugins || [];
     injectedConfig['plugins'].push(new WebpackOnBuildPlugin(callback));

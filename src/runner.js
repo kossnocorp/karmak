@@ -23,13 +23,13 @@ var runner = function(options, callback) {
     var singleRun = !!options.singleRun;
 
     var closeWatcher = watcher.watch({
-      path: process.cwd() + '/',
+      path: process.cwd(),
       singleRun: singleRun,
       patterns: options.patterns,
 
       onReady: function() {
         webpack.build({
-          path: process.cwd() + '/',
+          path: process.cwd(),
           singleRun: singleRun,
           webpackConfigPath: options.webpackConfigPath,
 
