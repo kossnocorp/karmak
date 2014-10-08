@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.1.2 (8 Oct 2014)
+
+* Bug fixes:
+  - Use `path.join` to better Windows-compatibility
+
 ## v0.1.1 (6 Oct 2014)
 
 * Bug fixes:
