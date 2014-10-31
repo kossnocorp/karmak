@@ -18,6 +18,10 @@ program
     "test files patterns (['**/*/_test_helper.js', '**/*_test.js', '!node_modules/**/*'])",
     function(val, acc) { return (acc || []).concat(val) }
   )
+  .option(
+    '--verbose <level>',
+    "verbose level (possible values: 'silent', 'critical', 'info', 'debug'; 'critical' is default)"
+  )
   .option('--env', "NODE_ENV ('test' if undefined)")
   .parse(process.argv);
 

@@ -11,7 +11,7 @@ var karmakKarma = {
    * @param {object} options
    */
   run: function(options) {
-    karmakKarma._log('Starting up...');
+    karmakKarma._log('Starting up');
 
     options = options || {};
 
@@ -53,19 +53,16 @@ var karmakKarma = {
    * @private
    * Posts to log as "karma" process
    * @param {string} message
+   * @param {number?} level
    */
-  _log: function(message) {
-    logger.log('karma', message);
-  },
+  _log: logger.log.bind(null, 'karma'),
 
   /**
    * @private
    * Posts error to log as "karma" process
    * @param {string} message
    */
-  _error: function(message) {
-    logger.error('karma', message);
-  }
+  _error: logger.error.bind(null, 'karma')
 };
 
 module.exports = karmakKarma;

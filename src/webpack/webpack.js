@@ -17,7 +17,7 @@ var karmakWebpack = {
    * @returns {function} stop build
    */
   build: function(options) {
-    karmakWebpack._log('Starting up...');
+    karmakWebpack._log('Starting up');
 
     options = options || {};
 
@@ -25,9 +25,11 @@ var karmakWebpack = {
     var compiler = webpack(webpackConfig);
 
     if (options.singleRun) {
+      karmakWebpack._log('Running single run');
       compiler.run(function() {});
 
     } else {
+      karmakWebpack._log('Running watch mode');
       express()
         .use(webpackMiddleware(compiler, { quiet: true }))
         .listen(SERVER_PORT);
@@ -92,19 +94,16 @@ var karmakWebpack = {
    * @private
    * Posts to log as "webpack" process
    * @param {string} message
+   * @param {number?} level
    */
-  _log: function(message) {
-    logger.log('webpack', message);
-  },
+  _log: logger.log.bind(null, 'webpack'),
 
   /**
    * @private
    * Posts error to log as "webpack" process
    * @param {string} message
    */
-  _error: function(message) {
-    logger.error('webpack', message);
-  }
+  _error: logger.error.bind(null, 'webpack')
 };
 
 module.exports = karmakWebpack;
