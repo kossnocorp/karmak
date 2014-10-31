@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.2.0 (31 Oct 2014)
+
+* Additions:
+  - `--verbose` option
+* Improvements:
+  - Better FS watcher (based on [gaze](https://github.com/shama/gaze))
+
 ## v0.1.3 (8 Oct 2014)
 
 * Bug fixes:
