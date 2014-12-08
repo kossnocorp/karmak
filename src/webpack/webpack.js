@@ -70,7 +70,12 @@ var karmakWebpack = {
 
     if (errors.length == 0) {
       karmakWebpack._log('Build completed');
-      var source = stats.compilation.assets['tests.js']._sourceResult;
+
+      // Tests entry id depends on output settings (e.g it may be "js/tests.js"
+      // or just "tests.js"), but it always will be the only single entry
+      // because we are patching webpack config via `karmakWebpack.injectConfig`
+      var entryId = Object.keys(stats.compilation.assets)[0];
+      var source = stats.compilation.assets[entryId]._sourceResult;
       fs.writeFileSync(path.join(baseDir, 'tmp', 'karmak_tests.js'), source);
 
       if (!state.onceBuilded) {
