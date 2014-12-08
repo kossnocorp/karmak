@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.2.1 (Dec 9 2014)
+
+* Bug fixes:
+  - Use generated entry id in karmakWebpack module
+
 ## v0.2.0 (31 Oct 2014)
 
 * Additions:
