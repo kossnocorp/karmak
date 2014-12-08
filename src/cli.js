@@ -29,15 +29,19 @@ var cli = function(program, callback) {
     verbose: program.verbose || 'critical'
   };
 
+  var watchedPatterns;
+  if (program.pattern) {
+    var watchedPatterns = "\n" + program.pattern.map(function(pattern) {
+      return '    - ' + pattern;
+    }).join("\n");
+  }
+
   log(
     "CLI options:\n" +
     '  * Webpack config path: ' + options.webpackConfigPath + "\n" +
     '  * Karma config path: ' + options.karmaConfigPath + "\n" +
-    "  * Watched patters:\n" +
-    program.pattern.map(function(pattern) {
-      return '    - ' + pattern;
-    }).join("\n") + "\n" +
-    '  * Single run?: ' + options.singleRun,
+    "  * Watched patters:" + watchedPatterns + "\n",
+    '  * Single run?: ' + options.singleRun + "\n",
     '  * Verbose level: ' + options.verbose
   );
 
