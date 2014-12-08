@@ -70,7 +70,7 @@ var karmakWebpack = {
 
     if (errors.length == 0) {
       karmakWebpack._log('Build completed');
-      var source = stats.compilation.assets['js/tests.js']._sourceResult;
+      var source = stats.compilation.assets['tests.js']._sourceResult;
       fs.writeFileSync(path.join(baseDir, 'tmp', 'karmak_tests.js'), source);
 
       if (!state.onceBuilded) {
