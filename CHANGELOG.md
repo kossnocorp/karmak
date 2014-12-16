@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.2.2 (Dec 16 2014)
+
+* Bug fixes:
+  - More reliable way to extract tests file name
+
 ## v0.2.1 (Dec 9 2014)
 
 * Bug fixes:
