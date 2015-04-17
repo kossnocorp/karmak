@@ -73,7 +73,9 @@ var karmakWebpack = {
 
       var testsFileName = stats.compilation.namedChunks['tests'].files[0];
       var asset = stats.compilation.assets[testsFileName];
-      var source = asset._sourceResult || asset._backedSource;
+      var source = asset._sourceResult
+        || asset._backedSource
+        || asset._cachedSource;
       fs.writeFileSync(path.join(baseDir, 'tmp', 'karmak_tests.js'), source);
 
       if (!state.onceBuilded) {
